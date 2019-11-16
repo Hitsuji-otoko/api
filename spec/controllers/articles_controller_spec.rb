@@ -11,8 +11,9 @@ describe ArticlesController do
             get :index
             # 特定の形式のJSONが返された時にパスする
             json = JSON.parse(response.body)
-            json_data = json[:data]
-            expect(json_data.length).to eq(2)
+            pp json
+            # json_data = json[:data]
+            # expect(json_data.length).to eq(2)
         end
     end
 end
