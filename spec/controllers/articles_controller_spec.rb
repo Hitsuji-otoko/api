@@ -8,6 +8,7 @@ describe ArticlesController do
         end
 
         it 'should return proper json' do
+            create_list :article, 2
             get :index
             # 特定の形式のJSONが返された時にパスする
             json = JSON.parse(response.body)
