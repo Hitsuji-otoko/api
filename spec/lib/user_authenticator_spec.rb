@@ -13,7 +13,6 @@ describe UserAuthenticator do
             let(:error) {
                 double("Sawyer::Resource", error: "bad_verification_code")
               }
-              
             # Octokit gemが実際のGitHub APIにリクエストを送信せずに、テストを実行したい
             before do
                 allow_any_instance_of(Octokit::Client).to receive(
