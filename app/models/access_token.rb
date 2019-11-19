@@ -7,7 +7,8 @@ class AccessToken < ApplicationRecord
   def generate_token
     # 無限ループ
     loop do
-      break if token.present? && !AccessToken.exists?(token: token)
+      # アクセストークンがリロードすると異なるバグはここのexistsの部分
+      break if token.present? && !AccessToken.where.not(id: id).exists?(token: token)
       self.token = SecureRandom.hex(10)
     end
   end
