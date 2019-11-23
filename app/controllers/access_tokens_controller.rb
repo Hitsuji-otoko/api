@@ -1,5 +1,5 @@
 class AccessTokensController < ApplicationController
-  before_action :authorize!, only: :destroy
+  skip_before_action :authorize!, only: :create
 
   def create
     # 認証の際、不適切なデータ形式でトークン送った場合にエラーを返す
