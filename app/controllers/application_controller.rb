@@ -7,6 +7,20 @@ class ApplicationController < ActionController::API
 
     private
 
+    def authorize!
+      raise AuthorizationError unless current_user
+    end
+
+    def access_token
+      # &ナビゲーション演算子: nilの場合nilを返す
+      provided_token = request.authorization&.gsub(/\ABearer\s/, '')
+      @access_token = AccessToken.find_by(token: provided_token)
+    end
+
+    def current_user
+      @current_user = access_token&.user
+    end
+
     def authencation_error
       error = {
         "status"=> "401",

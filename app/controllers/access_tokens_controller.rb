@@ -1,4 +1,5 @@
 class AccessTokensController < ApplicationController
+  before_action :authorize!, only: :destroy
 
   def create
     # 認証の際、不適切なデータ形式でトークン送った場合にエラーを返す
@@ -9,6 +10,6 @@ class AccessTokensController < ApplicationController
   end
   
   def destroy
-    raise AuthorizationError
+    current_user.access_token.destroy
   end
 end
